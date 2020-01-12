@@ -1,0 +1,36 @@
+{
+    "AWSEBDOckerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "kissta/fibonacci-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "kissta/fibonacci-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "kissta/fibonacci-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "kissta/fibonacci-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings":  [
+                {
+                 "hostPort": 80,
+                 "containerPort": 80
+                }
+            ],
+            "links": ["client", "server"]       
+        }
+    ]
+}

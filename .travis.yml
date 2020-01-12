@@ -21,3 +21,15 @@ after_success:
     - docker push kissta/fibonacci-server
     - docker push kissta/fibonacci-worker
 
+deploy:
+    provider: elasticbeanstalk
+    region: us-east-2
+    app: fib-docker
+    env: FibDocker-env
+    bucket_name: dockerfib
+    bucket_path: fib-docker 
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+
